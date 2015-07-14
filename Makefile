@@ -3,12 +3,18 @@ all:
 	@echo "make server"
 
 install:
+	npm install
+
+	sudo npm install -g ionic
+	sudo npm install -g cordova
+
 	ionic platform add android
+	ionic platform add ios
 
 	cordova plugin add com.ionic.keyboard
+	cordova plugin add cordova-plugin-whitelist
 	cordova plugin add cordova-plugin-camera
 	cordova plugin add cordova-plugin-file
-	cordova plugin add cordova-plugin-whitelist
 	cordova plugin add cordova-plugin-file-transfer
 
 server:
