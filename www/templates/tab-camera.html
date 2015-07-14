@@ -1,0 +1,30 @@
+<ion-view view-title="Camera">
+    <ion-content class="padding">
+        <div class="row">
+            <div class="col col-33">
+                <button class="button button-full button-positive" ng-click="takePhoto()">
+                    <i class="icon ion-camera"></i> Take
+                </button>
+            </div>
+            <div class="col col-33">
+                <button class="button button-full button-calm" ng-click="selectPhoto()">
+                    <i class="icon ion-ios-albums"></i> Select
+                </button>
+            </div>
+            <div class="col col-33">
+                <button class="button button-full button-balanced" ng-click="uploadPhoto()">
+                    <i class="icon ion-ios-upload"></i> Upload
+                </button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="list card">
+                    <div class="item item-image">
+                        <img ng-src="{{ previewImage }}" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>
