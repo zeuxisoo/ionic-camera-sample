@@ -1,3 +1,5 @@
+.PHONY: server
+
 all:
 	@echo "make install"
 	@echo "make server"
@@ -16,6 +18,9 @@ install:
 	cordova plugin add cordova-plugin-camera
 	cordova plugin add cordova-plugin-file
 	cordova plugin add cordova-plugin-file-transfer
+
+	cordova plugin add nl.x-services.plugins.socialsharing
+	cordova prepare
 
 server:
 	ionic serve

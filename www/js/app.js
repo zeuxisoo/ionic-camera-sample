@@ -31,6 +31,15 @@ app.config(function($stateProvider, $urlRouterProvider) {
                     controller: 'CameraCtrl'
                 }
             }
+        })
+        .state('tab.share', {
+            url: '/share',
+            views: {
+                'tab-share': {
+                    templateUrl: 'templates/tab-share.html',
+                    controller: 'ShareCtrl'
+                }
+            }
         });
 
       $urlRouterProvider.otherwise('/tab/camera');
