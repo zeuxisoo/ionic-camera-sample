@@ -12,5 +12,20 @@
                 </button>
             </div>
         </div>
+        <div class="row">
+            <div class="col">
+                <label class="item item-input">
+                    <span class="input-label">Share URL</span>
+                    <input type="text" value="http://hk.yahoo.com/" ng-model="share.url">
+                </label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <button class="button button-full button-balanced" ng-click="copy(share)">
+                    <i class="icon ion-ios-copy"></i> Copy
+                </button>
+            </div>
+        </div>
     </ion-content>
 </ion-view>

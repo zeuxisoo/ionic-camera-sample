@@ -93,7 +93,7 @@ controllers.controller('CameraCtrl', function($scope, $cordovaCamera, $ionicLoad
 
 });
 
-controllers.controller('ShareCtrl', function($scope, $ionicPopup, $ionicLoading, $cordovaSocialSharing) {
+controllers.controller('ShareCtrl', function($scope, $ionicPopup, $ionicLoading, $cordovaSocialSharing, $cordovaClipboard) {
     var popIt = function(title, message, error) {
         $ionicLoading.hide();
 
@@ -141,5 +141,25 @@ controllers.controller('ShareCtrl', function($scope, $ionicPopup, $ionicLoading,
             }, function(err) {
                 popIt('Error', 'Share failed', err);
             });
+    }
+
+    $scope.share = {
+        url: ""
+    };
+
+    $scope.copy = function(share) {
+        console.log(share);
+
+        if (share.url === "") {
+            popIt('Error', 'Please enter url first');
+        }else{
+            $cordovaClipboard
+                .copy(share.url)
+                .then(function () {
+                    popIt('Success', 'Copy success');
+                }, function () {
+                    popIt('Error', 'Copy failed');
+                });
+        }
     }
 });
