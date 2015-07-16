@@ -1,6 +1,7 @@
 var app = angular.module('starter', [
     'ionic',
     'starter.controllers',
+    'starter.services',
     'ngCordova'
 ])
 

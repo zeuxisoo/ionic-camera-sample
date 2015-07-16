@@ -1,5 +1,5 @@
 <?php
-$targetFolder    = "uploads/";
+$targetFolder    = dirname(__FILE__)."/uploads/";
 
 $status  = 1;
 $message = "";
@@ -65,6 +65,7 @@ echo json_encode([
     'message' => $message,
 
     // POST
-    'access_token' => $_POST['access_token'],
-    'check_it_out' => $_POST['check_it_out']
+    'access_token'    => $_POST['access_token'],
+    'check_it_out'    => $_POST['check_it_out'],
+    'crop_image_data' => $_POST['crop_image_data']
 ]);

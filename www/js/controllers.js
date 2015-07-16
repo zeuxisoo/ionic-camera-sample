@@ -1,9 +1,17 @@
 var controllers = angular.module('starter.controllers', []);
 
-controllers.controller('CameraCtrl', function($scope, $cordovaCamera, $ionicLoading) {
+controllers.controller('CameraCtrl', function(ucfirst, inArray, $scope, $timeout, $cordovaCamera, $ionicLoading) {
+    // Prepare scope
+    $scope.previewImage = 'http://placehold.it/400x300/555/FFF?text=Preview';
 
-    $scope.previewImage = 'http://placehold.it/1280x760/555/FFF?text=Preview';
+    // Init guillotine
+    var previewImageSelector    = $('.preview-image'),
+        cropPreviewImageOptions = {
+            width: 400,
+            height: 300,
+        }
 
+    // Scope function
     $scope.takePhoto = function() {
         var options = {
             quality : 75,
@@ -18,7 +26,18 @@ controllers.controller('CameraCtrl', function($scope, $cordovaCamera, $ionicLoad
         };
 
         $cordovaCamera.getPicture(options).then(function(imageData) {
+            $ionicLoading.show({
+                template: 'Rendering ...'
+            });
+
             $scope.previewImage = imageData;
+
+            $timeout(function() {
+                previewImageSelector.guillotine('remove');
+                previewImageSelector.guillotine(cropPreviewImageOptions);
+                previewImageSelector.guillotine('fit');
+                $ionicLoading.hide();
+            }, 1000);
         }, function(error) {
             console.error(error);
         });
@@ -39,7 +58,19 @@ controllers.controller('CameraCtrl', function($scope, $cordovaCamera, $ionicLoad
                 console.log(fileEntry);
                 console.log(fileEntry.toURL());
 
+                $ionicLoading.show({
+                    template: 'Rendering ...'
+                });
+
                 $scope.previewImage = fileEntry.toURL();
+
+                $timeout(function() {
+                    previewImageSelector.guillotine('remove');
+                    previewImageSelector.guillotine(cropPreviewImageOptions);
+                    previewImageSelector.guillotine('fit');
+
+                    $ionicLoading.hide();
+                }, 1000);
             }, function(error){
                 console.log(error);
             });
@@ -49,13 +80,18 @@ controllers.controller('CameraCtrl', function($scope, $cordovaCamera, $ionicLoad
     }
 
     $scope.uploadPhoto = function() {
-        $ionicLoading.show({
-            template: 'Uploading ...'
-        });
+        if (/placehold\.it/.test(previewImageSelector.prop('src'))) {
+            return;
+        }
 
+        var previewImageData  = previewImageSelector.guillotine('getData');
         var previewImage      = $scope.previewImage;
         var fileUploadOptions = new FileUploadOptions();
         var fileTransfer      = new FileTransfer();
+
+        $ionicLoading.show({
+            template: 'Uploading ...'
+        });
 
         fileUploadOptions.fileKey     = "file";
         fileUploadOptions.fileName    = previewImage.substr(previewImage.lastIndexOf('/') + 1);
@@ -64,8 +100,9 @@ controllers.controller('CameraCtrl', function($scope, $cordovaCamera, $ionicLoad
         fileUploadOptions.chunkedMode = false;
         fileUploadOptions.headers     = { Connection: "close" };
         fileUploadOptions.params      = {
-            access_token: 'YOUR_TOKEN_HERE',
-            check_it_out: 'Sure'
+            access_token   : 'YOUR_TOKEN_HERE',
+            check_it_out   : 'Sure',
+            crop_image_data: previewImageData
         };
 
         fileTransfer.upload(
@@ -89,6 +126,21 @@ controllers.controller('CameraCtrl', function($scope, $cordovaCamera, $ionicLoad
         )
 
         $ionicLoading.hide();
+    }
+
+    $scope.rotate = function(direction) {
+        console.log(direction);
+        previewImageSelector.guillotine('rotate' + ucfirst(direction));
+    }
+
+    $scope.zoom = function(direction) {
+        if (inArray(['in', 'out'], direction) === true) {
+            console.log(direction);
+            previewImageSelector.guillotine('zoom' + ucfirst(direction));
+        }else{
+            console.log(direction);
+            previewImageSelector.guillotine(direction);
+        }
     }
 
 });
