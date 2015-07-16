@@ -52,8 +52,6 @@ controllers.controller('CameraCtrl', function(ucfirst, inArray, $scope, $timeout
         };
 
         $cordovaCamera.getPicture(options).then(function(imageURI) {
-            $scope.previewImage = imageURI;
-
             window.resolveLocalFileSystemURL(imageURI, function(fileEntry) {
                 console.log(fileEntry);
                 console.log(fileEntry.toURL());
