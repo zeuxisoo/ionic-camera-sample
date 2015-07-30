@@ -1,6 +1,6 @@
 var controllers = angular.module('starter.controllers', []);
 
-controllers.controller('CameraCtrl', function(ucfirst, inArray, $scope, $timeout, $cordovaCamera, $ionicLoading) {
+controllers.controller('CameraCtrl', function(ucfirst, inArray, $scope, $timeout, $cordovaCamera, $cordovaFileTransfer, $ionicLoading) {
     // Prepare scope
     $scope.previewImage = 'http://placehold.it/400x300/555/FFF?text=Preview';
 
@@ -82,47 +82,52 @@ controllers.controller('CameraCtrl', function(ucfirst, inArray, $scope, $timeout
             return;
         }
 
-        var previewImageData  = previewImageSelector.guillotine('getData');
-        var previewImage      = $scope.previewImage;
-        var fileUploadOptions = new FileUploadOptions();
-        var fileTransfer      = new FileTransfer();
+        var previewImage     = $scope.previewImage,
+            previewImageData = previewImageSelector.guillotine('getData');
+
+        var server   = encodeURI("http://10.0.1.6:8080/upload.php"),
+            filePath = previewImage,
+            options  = {
+                fileKey: "file",
+                fileName   : previewImage.substr(previewImage.lastIndexOf('/') + 1),
+                mimeType   : "image/jpeg",
+                chunkedMode: false,
+                headers    : { Connection: "close" },
+                params     : {
+                    access_token    : 'YOUR_TOKEN_HERE',
+                    check_it_out    : 'Sure',
+                    crop_image_angle: previewImageData.angle,
+                    crop_image_h    : previewImageData.h,
+                    crop_image_scale: previewImageData.scale,
+                    crop_image_w    : previewImageData.w,
+                    crop_image_x    : previewImageData.x,
+                    crop_image_y    : previewImageData.y
+                }
+            }
 
         $ionicLoading.show({
             template: 'Uploading ...'
         });
 
-        fileUploadOptions.fileKey     = "file";
-        fileUploadOptions.fileName    = previewImage.substr(previewImage.lastIndexOf('/') + 1);
-        fileUploadOptions.mimeType    = "image/jpeg";
-        fileUploadOptions.chunkedMode = false;
-        fileUploadOptions.headers     = { Connection: "close" };
-        fileUploadOptions.params      = {
-            access_token   : 'YOUR_TOKEN_HERE',
-            check_it_out   : 'Sure',
-            crop_image_data: previewImageData
-        };
-
-        fileTransfer.upload(
-            previewImage,
-            encodeURI("http://10.0.1.6:8080/upload.php"),
+        $cordovaFileTransfer.upload(server, filePath, options).then(
             function(result) {
-                console.group("Success");
                 console.log("Code = " + result.responseCode);
                 console.log("Response = " + result.response);
                 console.log("Sent = " + result.bytesSent);
-                console.groupEnd();
+
+                $ionicLoading.hide();
             },
             function(error) {
-                console.group("Error");
                 console.log("An error has occurred: Code = " + error.code);
                 console.log("upload error source " + error.source);
                 console.log("upload error target " + error.target);
-                console.groupEnd();
-            },
-            fileUploadOptions
-        )
 
-        $ionicLoading.hide();
+                $ionicLoading.hide();
+            },
+            function(progress) {
+                console.log(progress);
+            }
+        );
     }
 
     $scope.rotate = function(direction) {

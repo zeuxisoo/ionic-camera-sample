@@ -4,7 +4,8 @@ $targetFolder    = dirname(__FILE__)."/uploads/";
 $status  = 1;
 $message = "";
 
-file_put_contents(__DIR__.'/log.txt', var_export($_FILES, true));
+file_put_contents(__DIR__.'/log-file.txt', var_export($_FILES, true));
+file_put_contents(__DIR__.'/log-params.txt', var_export($_POST, true));
 
 $check = getimagesize($_FILES["file"]["tmp_name"]);
 
@@ -67,7 +68,12 @@ echo json_encode([
     'message' => $message,
 
     // POST
-    'access_token'    => $_POST['access_token'],
-    'check_it_out'    => $_POST['check_it_out'],
-    'crop_image_data' => $_POST['crop_image_data']
+    'access_token'     => $_POST['access_token'],
+    'check_it_out'     => $_POST['check_it_out'],
+    'crop_image_angle' => $_POST['crop_image_angle'],
+    'crop_image_h'     => $_POST['crop_image_h'],
+    'crop_image_scale' => $_POST['crop_image_scale'],
+    'crop_image_w'     => $_POST['crop_image_w'],
+    'crop_image_x'     => $_POST['crop_image_x'],
+    'crop_image_y'     => $_POST['crop_image_y'],
 ]);

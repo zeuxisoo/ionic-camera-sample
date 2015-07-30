@@ -9,6 +9,8 @@ install:
 
 	sudo npm install -g ionic
 	sudo npm install -g cordova
+	sudo npm install -g ios-sim
+	sudo npm install -g ios-deploy
 
 	ionic platform add android
 	ionic platform add ios
@@ -30,8 +32,11 @@ server:
 upload:
 	php -S 10.0.1.6:8080 -t ./server
 
-run: fixbug
+android: fixbug
 	ionic run android
+
+ios:
+	ionic run ios --device
 
 fixbug:
 	# http://stackoverflow.com/questions/30640251/cordova-resolvelocalfilesystemurl-error-code-1000-in-android
