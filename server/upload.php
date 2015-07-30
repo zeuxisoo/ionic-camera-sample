@@ -4,6 +4,8 @@ $targetFolder    = dirname(__FILE__)."/uploads/";
 $status  = 1;
 $message = "";
 
+file_put_contents(__DIR__.'/log.txt', var_export($_FILES, true));
+
 $check = getimagesize($_FILES["file"]["tmp_name"]);
 
 if($check !== false) {

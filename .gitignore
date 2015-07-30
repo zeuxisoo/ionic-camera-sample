@@ -6,3 +6,4 @@ platforms/
 plugins/
 tmp/
 server/uploads/
+server/log.txt

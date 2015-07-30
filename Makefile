@@ -28,7 +28,7 @@ server:
 	ionic serve
 
 upload:
-	php -S 192.168.31.112:8080 -t ./server
+	php -S 10.0.1.6:8080 -t ./server
 
 run: fixbug
 	ionic run android

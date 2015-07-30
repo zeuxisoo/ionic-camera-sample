@@ -15,7 +15,7 @@ controllers.controller('CameraCtrl', function(ucfirst, inArray, $scope, $timeout
     $scope.takePhoto = function() {
         var options = {
             quality : 75,
-            destinationType : Camera.DestinationType.FILE_URL,
+            destinationType : Camera.DestinationType.FILE_URI,
             sourceType : Camera.PictureSourceType.CAMERA,
             // allowEdit : true,
             // encodingType: Camera.EncodingType.JPEG,
@@ -51,8 +51,8 @@ controllers.controller('CameraCtrl', function(ucfirst, inArray, $scope, $timeout
             encodingType: Camera.EncodingType.JPEG
         };
 
-        $cordovaCamera.getPicture(options).then(function(imageURI) {
-            window.resolveLocalFileSystemURL(imageURI, function(fileEntry) {
+        $cordovaCamera.getPicture(options).then(function(imageData) {
+            window.resolveLocalFileSystemURL(imageData, function(fileEntry) {
                 console.log(fileEntry);
                 console.log(fileEntry.toURL());
 
@@ -94,7 +94,6 @@ controllers.controller('CameraCtrl', function(ucfirst, inArray, $scope, $timeout
         fileUploadOptions.fileKey     = "file";
         fileUploadOptions.fileName    = previewImage.substr(previewImage.lastIndexOf('/') + 1);
         fileUploadOptions.mimeType    = "image/jpeg";
-        fileUploadOptions.chunkedMode = true;
         fileUploadOptions.chunkedMode = false;
         fileUploadOptions.headers     = { Connection: "close" };
         fileUploadOptions.params      = {
@@ -105,7 +104,7 @@ controllers.controller('CameraCtrl', function(ucfirst, inArray, $scope, $timeout
 
         fileTransfer.upload(
             previewImage,
-            encodeURI("http://192.168.31.112:8080/upload.php"),
+            encodeURI("http://10.0.1.6:8080/upload.php"),
             function(result) {
                 console.group("Success");
                 console.log("Code = " + result.responseCode);
