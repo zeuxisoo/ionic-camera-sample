@@ -41,6 +41,15 @@ app.config(function($stateProvider, $urlRouterProvider) {
                     controller: 'ShareCtrl'
                 }
             }
+        })
+        .state('tab.notification', {
+            url: '/notification',
+            views: {
+                'tab-notification': {
+                    templateUrl: 'templates/tab-notification.html',
+                    controller: 'NotificationCtrl'
+                }
+            }
         });
 
       $urlRouterProvider.otherwise('/tab/camera');

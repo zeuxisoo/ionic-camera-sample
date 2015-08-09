@@ -26,6 +26,8 @@ install:
 	cordova plugin add nl.x-services.plugins.socialsharing
 	cordova prepare
 
+	cordova plugin add https://github.com/katzer/cordova-plugin-local-notifications
+
 server:
 	ionic serve
 
