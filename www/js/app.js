@@ -52,6 +52,24 @@ app.config(function($stateProvider, $urlRouterProvider) {
                     controller: 'NotificationCtrl'
                 }
             }
+        })
+        .state('tab.notification_local', {
+            url: '/notification/local',
+            views: {
+                'tab-notification': {
+                    templateUrl: 'templates/notification-local.html',
+                    controller : 'NotificationLocalCtrl'
+                }
+            }
+        })
+        .state('tab.notification_pushwoosh', {
+            url: '/notification/pushwoosh',
+            views: {
+                'tab-notification': {
+                    templateUrl: 'templates/notification-pushwoosh.html',
+                    controller : 'NotificationPushwooshCtrl'
+                }
+            }
         });
 
       $urlRouterProvider.otherwise('/tab/camera');

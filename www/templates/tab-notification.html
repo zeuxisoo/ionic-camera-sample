@@ -1,50 +1,15 @@
-<ion-view view-title="Share">
+<ion-view view-title="Notification">
     <ion-content class="padding">
-        <div class="row">
-            <div class="col">
-                <h2 class="title">Local Notification</h2>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <label class="item item-input">
-                    <span class="input-label">Title</span>
-                    <input type="text" ng-model="localNotification.title" placeholder="Title">
-                </label>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <label class="item item-input">
-                    <span class="input-label">Text</span>
-                    <input type="text" ng-model="localNotification.text" placeholder="Title">
-                </label>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <button class="button button-full button-balanced" ng-click="notifyLocalNotification(localNotification)">
-                    <i class="icon ion-android-send"></i> Notify
-                </button>
-            </div>
-        </div>
+        <div class="list">
+            <a class="item item-icon-right" href="#/tab/notification/local">
+                Local Notification
+                <i class="icon ion-arrow-right-c"></i>
+            </a>
 
-        <div class="row">
-            <div class="col">
-                <h2 class="title">PushWoosh Notification</h2>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col col-50">
-                <button class="button button-full button-balanced" ng-click="pushWhooshDevice('register')" ng-disabled="pushWhooshRegisterStatus == 'registered'">
-                    <i class="icon ion-plus-circled"></i> Register
-                </button>
-            </div>
-            <div class="col col-50">
-                <button class="button button-full button-positive" ng-click="pushWhooshDevice('unregister')" ng-disabled="pushWhooshRegisterStatus == 'unregistered'">
-                    <i class="icon ion-android-remove-circle"></i> UnRegister
-                </button>
-            </div>
+            <a class="item item-icon-right" href="#/tab/notification/pushwoosh">
+                Pushwoosh Notification
+                <i class="icon ion-arrow-right-c"></i>
+            </a>
         </div>
     </ion-content>
 </ion-view>
