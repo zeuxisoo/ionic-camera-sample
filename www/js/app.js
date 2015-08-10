@@ -5,7 +5,7 @@ var app = angular.module('starter', [
     'ngCordova'
 ])
 
-app.run(function($ionicPlatform) {
+app.run(function($ionicPlatform, pushWoosh) {
     $ionicPlatform.ready(function() {
         if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
             cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
@@ -14,6 +14,8 @@ app.run(function($ionicPlatform) {
         if (window.StatusBar) {
             StatusBar.styleLightContent();
         }
+
+        pushWoosh.init();
     });
 })
 

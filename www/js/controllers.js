@@ -218,7 +218,9 @@ controllers.controller('ShareCtrl', function($scope, $ionicPopup, $ionicLoading,
     }
 });
 
-controllers.controller('NotificationCtrl', function($scope, $cordovaLocalNotification) {
+controllers.controller('NotificationCtrl', function($scope, $cordovaLocalNotification, pushWoosh) {
+    $scope.pushWhooshRegisterStatus = localStorage.getItem('pushWhooshRegisterStatus') || 'unregistered';
+
     $scope.notifyLocalNotification = function(notification) {
         console.log(notification);
 
@@ -229,5 +231,37 @@ controllers.controller('NotificationCtrl', function($scope, $cordovaLocalNotific
         }).then(function(result) {
             console.log(result);
         });
+    }
+
+    $scope.pushWhooshDevice = function(action) {
+        console.log(action);
+
+        if (action == 'register') {
+            pushWoosh.registerDevice().then(
+                function(status) {
+                    console.log(status);
+
+                    $scope.pushWhooshRegisterStatus = 'registered';
+                    localStorage.setItem('pushWhooshRegisterStatus', 'registered');
+                },
+                function(reason) {
+                    console.log('Failed' + reason);
+                }
+            );
+        }
+
+        if (action == 'unregister') {
+            pushWoosh.unregisterDevice().then(
+                function(status) {
+                    console.log(status);
+
+                    $scope.pushWhooshRegisterStatus = 'unregistered';
+                    localStorage.setItem('pushWhooshRegisterStatus', 'unregistered');
+                },
+                function(reason) {
+                    console.log('Failed' + reason);
+                }
+            );
+        }
     }
 });

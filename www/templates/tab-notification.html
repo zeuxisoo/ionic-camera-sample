@@ -28,5 +28,23 @@
                 </button>
             </div>
         </div>
+
+        <div class="row">
+            <div class="col">
+                <h2 class="title">PushWoosh Notification</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-50">
+                <button class="button button-full button-balanced" ng-click="pushWhooshDevice('register')" ng-disabled="pushWhooshRegisterStatus == 'registered'">
+                    <i class="icon ion-plus-circled"></i> Register
+                </button>
+            </div>
+            <div class="col col-50">
+                <button class="button button-full button-positive" ng-click="pushWhooshDevice('unregister')" ng-disabled="pushWhooshRegisterStatus == 'unregistered'">
+                    <i class="icon ion-android-remove-circle"></i> UnRegister
+                </button>
+            </div>
+        </div>
     </ion-content>
 </ion-view>

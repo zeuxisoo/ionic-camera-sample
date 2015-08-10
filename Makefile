@@ -28,6 +28,8 @@ install:
 
 	cordova plugin add https://github.com/katzer/cordova-plugin-local-notifications
 
+	cordova plugin add https://github.com/Pushwoosh/pushwoosh-phonegap-3.0-plugin.git
+
 server:
 	ionic serve
 
