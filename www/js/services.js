@@ -104,3 +104,59 @@ services.factory('pushWoosh', ['$q', function($q) {
         return new PushWoosh();
     }
 }]);
+
+services.factory('parse', ['$q', function($q) {
+    if (typeof window.cordova === "undefined") {
+        console.warn('Please run on real device when you want to test notification');
+
+        return {
+            init: function() {},
+            subscribe: function() {},
+            unsubscribe: function() {},
+        }
+    }else{
+        var appId    = '<APP_ID>';
+        var clientId = '<CLIENT_ID>';
+        var channel  = '<CHANNEL>';
+
+        var Parse = function() {};
+
+        Parse.prototype.init = function() {
+            var q = $q.defer();
+
+            parsePlugin.initialize(appId, clientId, function(status) {
+                q.resolve(status);
+            }, function(reason) {
+                q.reject(reason);
+            });
+
+            return q.promise;
+        }
+
+        Parse.prototype.subscribe = function() {
+            var q = $q.defer();
+
+            parsePlugin.subscribe(channel, function(status) {
+                q.resolve(status);
+            }, function(reason) {
+                q.reject(reson);
+            })
+
+            return q.promise;
+        }
+
+        Parse.prototype.unsubscribe = function() {
+            var q = $q.defer();
+
+            parsePlugin.unsubscribe(channel, function(status) {
+                q.resolve(status);
+            }, function(reason) {
+                q.reject(reson);
+            })
+
+            return q.promise;
+        }
+
+        return new Parse();
+    }
+}]);

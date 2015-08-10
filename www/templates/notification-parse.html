@@ -1,0 +1,21 @@
+<ion-view view-title="Parse Notification">
+    <ion-content class="padding">
+        <div class="row">
+            <div class="col">
+                <h4 class="title">Parse Notification</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-50">
+                <button class="button button-full button-balanced" ng-click="parseDevice('subscribe')" ng-disabled="parseSubscribeStatus == 'subscribed'">
+                    <i class="icon ion-plus-circled"></i> Subscribe
+                </button>
+            </div>
+            <div class="col col-50">
+                <button class="button button-full button-positive" ng-click="parseDevice('unsubscribe')" ng-disabled="parseSubscribeStatus == 'unsubscribed'">
+                    <i class="icon ion-android-remove-circle"></i> UnSubscribe
+                </button>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

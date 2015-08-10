@@ -43,6 +43,47 @@ And the last step
     3. Go to the project `configure` section
     4. Add the `GSM API Key` in Android section
 
+### Parse
+
+When using the `Parse`, Please edit the `services.js` file first
+
+    var appId    = '<APP_ID>';
+    var clientId = '<CLIENT_ID>';
+    var channel  = '<CHANNEL>';
+
+About the `App Id` and `Client Id`
+
+    1. Go to the parse website and Create the application
+    2. Go to `Application > Settings > Keys`
+
+About the `Channel`
+
+    You can custom which channel you want to subscribe.
+    Because the push notification can specify which channel to push.
+
+    E.g. Camera, MyApp and etc
+
+About the `GSM` or `APNs` API Key
+
+    1. Go to `Application > Settings > Push`
+    2. Submit the API and Certs which platform you want to push
+
+Test push notification using REST API
+
+    curl -X POST \
+    -H "X-Parse-Application-Id: <APPLICATION_ID>" \
+    -H "X-Parse-REST-API-Key: <REST_API_KEY>" \
+    -H "Content-Type: application/json" \
+    -d '{
+        "channels": [
+          "Camera"
+        ],
+        "data": {
+          "alert": "The a test message using the rest api."
+        }
+      }' \
+      https://api.parse.com/1/push
+
 ## Problem
 
 Can not upload when using iOS

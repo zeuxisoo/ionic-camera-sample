@@ -30,6 +30,8 @@ install:
 
 	cordova plugin add https://github.com/Pushwoosh/pushwoosh-phonegap-3.0-plugin.git
 
+	cordova plugin add https://github.com/benjie/phonegap-parse-plugin
+
 server:
 	ionic serve
 

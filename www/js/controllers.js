@@ -4,4 +4,5 @@ var controllers = angular.module('starter.controllers', [
     'starter.controllers.notification',
     'starter.controllers.notification.local',
     'starter.controllers.notification.pushwoosh',
+    'starter.controllers.notification.parse'
 ]);
