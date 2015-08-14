@@ -1,0 +1,21 @@
+<ion-view view-title="Ionic Notification">
+    <ion-content class="padding">
+        <div class="row">
+            <div class="col">
+                <h4 class="title">Ionic Notification</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-50">
+                <button class="button button-full button-balanced" ng-click="ionicDevice('register')" ng-disabled="ionicRegisterStatus == 'registered'">
+                    <i class="icon ion-plus-circled"></i> Register
+                </button>
+            </div>
+            <div class="col col-50">
+                <button class="button button-full button-positive" ng-click="ionicDevice('unregister')" ng-disabled="ionicRegisterStatus == 'unregistered'">
+                    <i class="icon ion-android-remove-circle"></i> UnRegister
+                </button>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

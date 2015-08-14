@@ -8,3 +8,4 @@ tmp/
 server/uploads/
 server/log-file.txt
 server/log-params.txt
+.io-config.json

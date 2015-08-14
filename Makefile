@@ -26,11 +26,21 @@ install:
 	cordova plugin add nl.x-services.plugins.socialsharing
 	cordova prepare
 
-	cordova plugin add https://github.com/katzer/cordova-plugin-local-notifications
+	# Local push
+	# cordova plugin add https://github.com/katzer/cordova-plugin-local-notifications
 
-	cordova plugin add https://github.com/Pushwoosh/pushwoosh-phonegap-3.0-plugin.git
+	# Pushwoosh
+	# cordova plugin add https://github.com/Pushwoosh/pushwoosh-phonegap-3.0-plugin.git
 
-	cordova plugin add https://github.com/benjie/phonegap-parse-plugin
+	# Parse
+	# cordova plugin add https://github.com/benjie/phonegap-parse-plugin
+
+	# Ionic Push
+	npm install -g bower
+	ionic add ionic-service-core
+	ionic plugin add https://github.com/phonegap-build/PushPlugin.git
+	ionic add ngCordova
+	ionic add ionic-service-push
 
 server:
 	ionic serve

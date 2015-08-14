@@ -13,7 +13,15 @@ services.factory('inArray', function() {
 });
 
 services.factory('pushWoosh', ['$q', function($q) {
-    if (typeof window.cordova === "undefined") {
+    var loaded = true;
+
+    try {
+        cordova.require("com.pushwoosh.plugins.pushwoosh.PushNotification");
+    }catch(e) {
+        loaded = false;
+    }
+
+    if (typeof window.cordova === "undefined" || loaded === false) {
         console.warn('Please run on real device when you want to test notification');
 
         return {
@@ -106,7 +114,7 @@ services.factory('pushWoosh', ['$q', function($q) {
 }]);
 
 services.factory('parse', ['$q', function($q) {
-    if (typeof window.cordova === "undefined") {
+    if (typeof window.cordova === "undefined" || typeof window.parsePlugin === "undefined") {
         console.warn('Please run on real device when you want to test notification');
 
         return {
@@ -158,5 +166,73 @@ services.factory('parse', ['$q', function($q) {
         }
 
         return new Parse();
+    }
+}]);
+
+services.factory('ionic', ['$q', '$rootScope', '$ionicUser', '$ionicPush', function($q, $rootScope, $ionicUser, $ionicPush) {
+    if (typeof window.cordova === "undefined") {
+        console.warn('Please run on real device when you want to test notification');
+
+        return {
+            init: function() {},
+            registerDevice: function() {},
+            unregisterDevice: function() {}
+        }
+    }else{
+        var Ionic = function() {};
+
+        Ionic.prototype.init = function() {
+            $rootScope.$on('$cordovaPush:tokenReceived', function(event, data) {
+                console.log("Successfully registered token " + data.token);
+                console.log('Ionic Push: Got token ', data.token, data.platform);
+            });
+        }
+
+        Ionic.prototype.registerDevice = function() {
+            var q    = $q.defer();
+            var user = $ionicUser.get();
+
+            if(!user.user_id) {
+                user.user_id = $ionicUser.generateGUID();
+            }
+
+            angular.extend(user, {
+                name: 'Anonymous',
+                bio: 'I am anonymous user'
+            });
+
+            $ionicUser.identify(user).then(function() {
+                user_id: $ionicUser.generateGUID()
+            }).then(function(userData) {
+                console.log(userData);
+
+                $ionicPush.register({
+                    canShowAlert       : true,
+                    canSetBadge        : true,
+                    canPlaySound       : true,
+                    canRunActionsOnWake: true,
+                    onNotification     : function(notification) {
+                        console.log("onNotification -> ");
+                        console.log(notification);
+                        return true;
+                    }
+                }, userData).then(
+                    function(status) {
+                        q.resolve(status);
+                    },
+                    function(reason) {
+                        q.reject(reason);
+                    }
+                );
+            });
+
+            return q.promise;
+        }
+
+        Ionic.prototype.unregisterDevice = function() {
+            return $ionicPush.unregister();
+        }
+
+        return new Ionic();
     }
 }]);

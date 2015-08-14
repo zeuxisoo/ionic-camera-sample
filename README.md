@@ -12,6 +12,8 @@ Base sample project for my testing on ionic with camera plugin
 
 ## Notification
 
+Note. Please install the related dependecy in Makefile before do changes
+
 ### PushWhoosh
 
 When using the `PushWhoosh`, Please edit the `services.js` file first
@@ -83,6 +85,52 @@ Test push notification using REST API
         }
       }' \
       https://api.parse.com/1/push
+
+### Ionic Service
+
+Register the app to ionic service
+
+    cd /path/to/project
+    ionic io init
+
+        Email: <YOUR_EMAIL>
+        Password: <YOUR_PASSWORD>
+
+Register the `API key`
+
+    ionic push --google-api-key <YOUR_GOOGLE_API_KEY>
+
+Register the `GCM key`
+
+    ionic config set gcm_key <YOUR_GCM_PROJECT_NUMBER>
+
+Add Premission in `platforms/android/AndroidManifest.xml`
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+Test push notification using REST API
+
+- Can be <ENTER> without password
+
+        curl -u <YOUR_SECRET_KEY> \
+        -H "Content-Type: application/json" \
+        -H "X-Ionic-Application-Id: <YOUR_APP_ID>" \
+        -d '{
+            "tokens": [
+                "<DEVICE_TOKEN>"
+            ],
+            "notification": {
+                "alert": "This is a test message."
+            }
+        }' \
+        https://push.ionic.io/api/v1/push
+
+Check the push notification status in queue
+
+    curl -u <YOUR_SECRET_KEY> \
+    -H "Content-Type: application/json" \
+    -H "X-Ionic-Application-Id: <YOUR_APP_ID>" \
+    https://push.ionic.io/api/v1/status/<MESSAGE_ID>
 
 ## Problem
 

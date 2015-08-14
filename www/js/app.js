@@ -1,11 +1,13 @@
 var app = angular.module('starter', [
     'ionic',
+    'ionic.service.core',
+    'ionic.service.push',
     'starter.controllers',
     'starter.services',
     'ngCordova'
 ])
 
-app.run(function($ionicPlatform, pushWoosh, parse) {
+app.run(function($ionicPlatform, pushWoosh, parse, ionic) {
     $ionicPlatform.ready(function() {
         if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
             cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
@@ -17,6 +19,7 @@ app.run(function($ionicPlatform, pushWoosh, parse) {
 
         pushWoosh.init();
         parse.init();
+        ionic.init();
     });
 })
 
@@ -78,6 +81,15 @@ app.config(function($stateProvider, $urlRouterProvider) {
                 'tab-notification': {
                     templateUrl: 'templates/notification-parse.html',
                     controller : 'NotificationParseCtrl'
+                }
+            }
+        })
+        .state('tab.notification_ionic', {
+            url: '/notification/ionic',
+            views: {
+                'tab-notification': {
+                    templateUrl: 'templates/notification-ionic.html',
+                    controller : 'NotificationIonicCtrl'
                 }
             }
         });
