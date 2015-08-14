@@ -12,7 +12,9 @@ Base sample project for my testing on ionic with camera plugin
 
 ## Notification
 
-Note. Please install the related dependecy in Makefile before do changes
+Note. Please install the related dependencies in the Makefile before make changes
+
+Currently. The default enabled dependency is Ionic push service
 
 ### PushWhoosh
 
