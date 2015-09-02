@@ -166,11 +166,25 @@ Check the push notification status in queue
 				MainActivity
 				
 		- Key Hashes
-		
-			***Need for production***
-				
-				http://forum.ionicframework.com/t/ionic-toturial-for-building-a-release-apk/15758/17
+
+			1. check the `APP_NAME` is or not exists in current keystore alias list
+
+					keytool -list -v -keystore ~/.android/debug.keystore
 	
+			2. create the alias if you can not found `APP_NAME` in alias list (default password `android`)
+
+					keytool -genkey -v -keystore ~/.android/debug.keystore -alias <APP_NAME> -keyalg RSA -keysize 2048 -validity 10000
+					
+			3. fill all information the create alias
+			
+			4. open the `build.json` in project root
+			
+			5. update the previous information in `debug` section for `ionic run android`
+
+			6. get the key hash from `APP_NAME` alias
+
+					keytool -exportcert -alias <APP_NAME> -keystore ~/.android/debug.keystore | openssl sha1 -binary | openssl base64
+			
 ## Problem
 
 Can not upload when using iOS
