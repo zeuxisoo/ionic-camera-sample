@@ -2,10 +2,10 @@
   "name": "HelloIonic",
   "private": "true",
   "devDependencies": {
+    "facebook-connect-plugin": "https://raw.githubusercontent.com/Wizcorp/phonegap-facebook-plugin/master/facebookConnectPlugin.js",
     "ionic": "driftyco/ionic-bower#1.0.1",
     "ionic-service-core": "~0.1.10",
     "ionic-service-push": "~0.1.13",
-    "ngCordova": "~0.1.20-alpha",
-    "facebook-connect-plugin": "https://raw.githubusercontent.com/Wizcorp/phonegap-facebook-plugin/master/facebookConnectPlugin.js"
+    "ngCordova": "~0.1.20-alpha"
   }
 }

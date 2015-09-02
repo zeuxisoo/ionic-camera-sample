@@ -1,17 +1,17 @@
 {
      "android": {
          "debug": {
-             "keystore": "/Users/zeuxis/.android/debug.keystore",
+             "keystore": "../../../.android/debug.keystore",
              "storePassword": "android",
              "alias": "camera",
              "password" : "password",
              "keystoreType": ""
          },
          "release": {
-             "keystore": "/Users/zeuxis/.android/release.keystore",
-             "storePassword": "",
+             "keystore": "../../../.android/debug.keystore",
+             "storePassword": "android",
              "alias": "camera",
-             "password" : "",
+             "password" : "password",
              "keystoreType": ""
          }
      }

@@ -15,16 +15,18 @@ install:
 	ionic platform add android
 	ionic platform add ios
 
-	cordova plugin add com.ionic.keyboard
+	cordova plugin add cordova-plugin-device
+	cordova plugin add cordova-plugin-console
 	cordova plugin add cordova-plugin-whitelist
+	cordova plugin add cordova-plugin-splashscreen
+
+	cordova plugin add com.ionic.keyboard
 	cordova plugin add cordova-plugin-camera
 	cordova plugin add cordova-plugin-file
 	cordova plugin add cordova-plugin-file-transfer
-
 	cordova plugin add com.verso.cordova.clipboard
 
 	cordova plugin add nl.x-services.plugins.socialsharing
-	cordova prepare
 
 	# Local push
 	# cordova plugin add https://github.com/katzer/cordova-plugin-local-notifications
