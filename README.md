@@ -134,6 +134,43 @@ Check the push notification status in queue
     -H "X-Ionic-Application-Id: <YOUR_APP_ID>" \
     https://push.ionic.io/api/v1/status/<MESSAGE_ID>
 
+## Facebook login
+
+1. Enter to developer page and create app
+
+		https://developers.facebook.com
+	
+2. Go to Dashboard, Get `App ID` and `API Version`
+3. Edit `Makefile`
+
+		cordova plugin add https://github.com/Wizcorp/phonegap-facebook-plugin.git --variable APP_ID="<API_VERSION>" --variable APP_NAME="<API_VERSION>"
+		
+4. Run Makefile
+
+		make facebook
+		
+5. Enter to developer Dashboard > Settings
+
+	- Website
+		
+			http://example.com
+			
+	- Android
+		
+		- Google Play Package Name
+			
+				Find at /path/to/project/platforms/android/AndroidManifest.xml -> package="com.ionicframework.xxxxxxx"
+				
+		- Class Name
+				
+				MainActivity
+				
+		- Key Hashes
+		
+			***Need for production***
+				
+				http://forum.ionicframework.com/t/ionic-toturial-for-building-a-release-apk/15758/17
+	
 ## Problem
 
 Can not upload when using iOS

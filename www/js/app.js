@@ -7,22 +7,6 @@ var app = angular.module('starter', [
     'ngCordova'
 ])
 
-app.run(function($ionicPlatform, pushWoosh, parse, ionic) {
-    $ionicPlatform.ready(function() {
-        if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
-            cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-        }
-
-        if (window.StatusBar) {
-            StatusBar.styleLightContent();
-        }
-
-        pushWoosh.init();
-        parse.init();
-        ionic.init();
-    });
-})
-
 app.config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
         .state('tab', {
@@ -92,6 +76,15 @@ app.config(function($stateProvider, $urlRouterProvider) {
                     controller : 'NotificationIonicCtrl'
                 }
             }
+        })
+        .state('tab.social', {
+            url: '/social',
+            views: {
+                'tab-social': {
+                    templateUrl: 'templates/tab-social.html',
+                    controller: 'SocialCtrl'
+                }
+            }
         });
 
       $urlRouterProvider.otherwise('/tab/camera');
@@ -100,4 +93,20 @@ app.config(function($stateProvider, $urlRouterProvider) {
 app.config(function($ionicConfigProvider) {
     $ionicConfigProvider.tabs.style('standard');
     $ionicConfigProvider.tabs.position('bottom');
+});
+
+app.run(function($ionicPlatform, pushWoosh, parse, ionic) {
+    $ionicPlatform.ready(function() {
+        if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
+            cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+        }
+
+        if (window.StatusBar) {
+            StatusBar.styleLightContent();
+        }
+
+        pushWoosh.init();
+        parse.init();
+        ionic.init();
+    });
 });

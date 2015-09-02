@@ -6,4 +6,5 @@ var controllers = angular.module('starter.controllers', [
     'starter.controllers.notification.pushwoosh',
     'starter.controllers.notification.parse',
     'starter.controllers.notification.ionic',
+    'starter.controllers.social',
 ]);

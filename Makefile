@@ -59,3 +59,15 @@ fixbug:
 	# https://github.com/apache/cordova-plugin-file/pull/119
 	rm -rf platforms/android/src/org/apache/cordova/file/ContentFilesystem.java
 	cp patches/ContentFilesystem.java platforms/android/src/org/apache/cordova/file/ContentFilesystem.java
+
+facebook:
+	cordova platform remove ios
+	cordova platform remove android
+	cordova platform remove browser
+
+	cordova platform add ios
+	cordova platform add android
+
+	cordova plugin add https://github.com/Wizcorp/phonegap-facebook-plugin.git --variable APP_ID="<API_VERSION>" --variable APP_NAME="<API_VERSION>"
+
+	bower update
