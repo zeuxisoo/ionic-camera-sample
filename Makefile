@@ -63,13 +63,16 @@ fixbug:
 	cp patches/ContentFilesystem.java platforms/android/src/org/apache/cordova/file/ContentFilesystem.java
 
 facebook:
-	cordova platform remove ios
-	cordova platform remove android
-	cordova platform remove browser
+	cordova plugin rm com.phonegap.plugins.PushPlugin
+	cordova plugin rm com.phonegap.plugins.facebookconnect
 
-	cordova platform add ios
-	cordova platform add android
+	cordova platform rm android ios
 
-	cordova plugin add https://github.com/Wizcorp/phonegap-facebook-plugin.git --variable APP_ID="<API_VERSION>" --variable APP_NAME="<API_VERSION>"
+	# Fix facebook connect and push notification conflic
+	# - ref: https://github.com/Wizcorp/phonegap-facebook-plugin/issues/1010
+	cordova plugin add https://github.com/Telerik-Verified-Plugins/Facebook --variable APP_ID="163300713855872" --variable APP_NAME="Camera Sample"
+	cordova plugin add https://github.com/Telerik-Verified-Plugins/PushNotification
+
+	cordova platform add android ios
 
 	bower update
