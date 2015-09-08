@@ -28,6 +28,9 @@ install:
 
 	cordova plugin add nl.x-services.plugins.socialsharing
 
+	cordova plugin add cordova-plugin-network-information
+	cordova plugin add https://github.com/EddyVerbruggen/Toast-PhoneGap-Plugin.git
+
 	# Local push
 	# cordova plugin add https://github.com/katzer/cordova-plugin-local-notifications
 

@@ -95,7 +95,7 @@ app.config(function($ionicConfigProvider) {
     $ionicConfigProvider.tabs.position('bottom');
 });
 
-app.run(function($ionicPlatform, pushWoosh, parse, ionic) {
+app.run(function($rootScope, $cordovaNetwork, $cordovaToast, $ionicPlatform, pushWoosh, parse, ionic) {
     $ionicPlatform.ready(function() {
         if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
             cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
@@ -104,6 +104,18 @@ app.run(function($ionicPlatform, pushWoosh, parse, ionic) {
         if (window.StatusBar) {
             StatusBar.styleLightContent();
         }
+
+        if ($cordovaNetwork.isOffline()) {
+            $cordovaToast.showShortCenter('No network connection available');
+        }
+
+        $rootScope.$on('$cordovaNetwork:offline', function(event, networkState) {
+            $cordovaToast.showShortCenter('Network disconnected');
+        });
+
+        $rootScope.$on('$cordovaNetwork:online', function(event, networkState){
+            $cordovaToast.showShortCenter('Network connected');
+        });
 
         pushWoosh.init();
         parse.init();
