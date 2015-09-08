@@ -201,10 +201,9 @@ services.factory('ionic', ['$q', '$rootScope', '$ionicUser', '$ionicPush', funct
                 bio: 'I am anonymous user'
             });
 
-            $ionicUser.identify(user).then(function() {
-                user_id: $ionicUser.generateGUID()
-            }).then(function(userData) {
+            $ionicUser.identify(user).then(function(userData) {
                 console.log(userData);
+                console.log(user);
 
                 $ionicPush.register({
                     canShowAlert       : true,
@@ -216,7 +215,7 @@ services.factory('ionic', ['$q', '$rootScope', '$ionicUser', '$ionicPush', funct
                         console.log(notification);
                         return true;
                     }
-                }, userData).then(
+                }, user).then(
                     function(status) {
                         q.resolve(status);
                     },

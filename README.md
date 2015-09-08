@@ -110,6 +110,13 @@ Add Premission in `platforms/android/AndroidManifest.xml`
 
     <uses-permission android:name="android.permission.INTERNET" />
 
+Update the information
+
+    vim www/js/app.js
+
+        app_id : '<APP_ID>',
+        api_key: '<PUBLIC_KEY>'
+
 Test push notification using REST API
 
 - Can be <ENTER> without password
@@ -139,52 +146,52 @@ Check the push notification status in queue
 1. Enter to developer page and create app
 
 		https://developers.facebook.com
-	
+
 2. Go to Dashboard, Get `App ID` and `API Version`
 3. Edit `Makefile`
 
 		cordova plugin add https://github.com/Wizcorp/phonegap-facebook-plugin.git --variable APP_ID="<API_VERSION>" --variable APP_NAME="<API_VERSION>"
-		
+
 4. Run Makefile
 
 		make facebook
-		
+
 5. Enter to developer Dashboard > Settings
 
 	- Website
-		
+
 			http://example.com
-			
+
 	- Android
-		
+
 		- Google Play Package Name
-			
+
 				Find at /path/to/project/platforms/android/AndroidManifest.xml -> package="com.ionicframework.xxxxxxx"
-				
+
 		- Class Name
-				
+
 				MainActivity
-				
+
 		- Key Hashes
 
 			1. check the `APP_NAME` is or not exists in current keystore alias list
 
 					keytool -list -v -keystore ~/.android/debug.keystore
-	
+
 			2. create the alias if you can not found `APP_NAME` in alias list (default password `android`)
 
 					keytool -genkey -v -keystore ~/.android/debug.keystore -alias <APP_NAME> -keyalg RSA -keysize 2048 -validity 10000
-					
+
 			3. fill all information the create alias
-			
+
 			4. open the `build.json` in project root
-			
+
 			5. update the previous information in `debug` section for `ionic run android`
 
 			6. get the key hash from `APP_NAME` alias
 
 					keytool -exportcert -alias <APP_NAME> -keystore ~/.android/debug.keystore | openssl sha1 -binary | openssl base64
-			
+
 ## Problem
 
 Can not upload when using iOS

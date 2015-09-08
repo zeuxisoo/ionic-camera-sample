@@ -95,6 +95,13 @@ app.config(function($ionicConfigProvider) {
     $ionicConfigProvider.tabs.position('bottom');
 });
 
+app.config(['$ionicAppProvider', function($ionicAppProvider) {
+    $ionicAppProvider.identify({
+        app_id : '<APP_ID>',
+        api_key: '<PUBLIC_KEY>'
+    });
+}]);
+
 app.run(function($rootScope, $cordovaNetwork, $cordovaToast, $ionicPlatform, pushWoosh, parse, ionic) {
     $ionicPlatform.ready(function() {
         if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
