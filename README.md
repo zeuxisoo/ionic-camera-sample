@@ -129,7 +129,17 @@ Test push notification using REST API
                 "<DEVICE_TOKEN>"
             ],
             "notification": {
-                "alert": "This is a test message."
+                "alert": "This is a test message.",
+                "ios"  : {
+                    "payload": {
+                        "$state": "tab.share"
+                    }
+                },
+                "android"  : {
+                    "payload": {
+                        "$state": "tab.share"
+                    }
+                }
             }
         }' \
         https://push.ionic.io/api/v1/push
