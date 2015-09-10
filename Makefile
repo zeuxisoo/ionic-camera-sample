@@ -43,9 +43,10 @@ install:
 	# Ionic Push
 	npm install -g bower
 	ionic add ionic-service-core
-	ionic plugin add https://github.com/phonegap-build/PushPlugin.git
 	ionic add ngCordova
 	ionic add ionic-service-push
+
+	cordova plugin add https://github.com/phonegap-build/PushPlugin.git
 
 server:
 	ionic serve
@@ -66,7 +67,6 @@ fixbug:
 	cp patches/ContentFilesystem.java platforms/android/src/org/apache/cordova/file/ContentFilesystem.java
 
 facebook:
-	cordova plugin rm com.phonegap.plugins.PushPlugin
 	cordova plugin rm com.phonegap.plugins.facebookconnect
 
 	cordova platform rm android ios
@@ -74,7 +74,6 @@ facebook:
 	# Fix facebook connect and push notification conflic
 	# - ref: https://github.com/Wizcorp/phonegap-facebook-plugin/issues/1010
 	cordova plugin add https://github.com/Telerik-Verified-Plugins/Facebook --variable APP_ID="163300713855872" --variable APP_NAME="Camera Sample"
-	cordova plugin add https://github.com/Telerik-Verified-Plugins/PushNotification
 
 	cordova platform add android ios
 
